@@ -15,13 +15,13 @@
         </div>
         <div id="medium">
            <ol>
-            <li v-for="todo in list">
-              <input type="checkbox" style="zoom:150%" v-model="todo.finished"><span :class="{finish: todo.finished}">{{todo.text}}</span></li>
+            <li v-for="todo in list" v-show="defultshow||(whichshow?todo.finished:!todo.finished)">
+              <input type="checkbox" style="zoom:150%" v-model="todo.finished"><span :class="{finish: todo.finished}">{{todo.text}}</span>
             </li>
            </ul>
         </div>
         <div id="buttom">
-           <span>All</span><span>Active</span><span>Complete</span>
+           <a href="#" :class="{active:index===dataStatusIndex}" v-for="(item,index) in dataStatus" @click="switchStatus(index)" :key="index">{{item}}</a>
         </div>
     </div>
   </div>
@@ -34,11 +34,30 @@
 
 
         ],
+        dataStatus:["All","Active","Complete"],
+        dataStatusIndex: 0,
+        whichshow:true,
+        defultshow:true
       },
       methods:{
         add:function(){
           this.list.push({text:this.inputValue,finished:this.finished});
           this.inputValue = '';
+        },
+        switchStatus:function(index) { 
+           this.dataStatusIndex = index
+           if (this.dataStatus[index] === "Active") {
+              this.defultshow = false
+              this.whichshow = false
+              console.log("Active");
+           } else if (this.dataStatus[index] === "Complete") {
+              this.defultshow = false
+              this.whichshow = true
+              console.log("Complete");
+           } else if (this.dataStatus[index] === "All") {
+              this.defultshow = true
+              console.log("All");
+           }
         },
       }
      });
