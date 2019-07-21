@@ -42,6 +42,10 @@
 	font-size: 25px;
 
 }
+#medium li .finish{
+	text-decoration: line-through;
+	opacity: .5;
+}
 #buttom{
    text-align: center;
    margin-top: 80px;

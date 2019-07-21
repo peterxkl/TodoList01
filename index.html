@@ -16,7 +16,7 @@
         <div id="medium">
            <ol>
             <li v-for="todo in list">
-              <input type="checkbox" style="zoom:150%"><span>{{todo.text}}</span></li>
+              <input type="checkbox" style="zoom:150%" v-model="todo.finished"><span :class="{finish: todo.finished}">{{todo.text}}</span></li>
             </li>
            </ul>
         </div>
@@ -37,7 +37,7 @@
       },
       methods:{
         add:function(){
-          this.list.push({text:this.inputValue});
+          this.list.push({text:this.inputValue,finished:this.finished});
           this.inputValue = '';
         },
       }
