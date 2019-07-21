@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>123</title>
-    <script src="js/vuejs-2.5.16.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
     <link rel="stylesheet" type="text/css" href="css/index.css">
 </head>
 <body>
@@ -11,14 +11,13 @@
         <div id="top">
            <h2>Jquery To Do List</h2>
            <h4>Simple Todo List with adding and filter by fiff status</h4>
-           <input type="text"><button>Add</button>
+           <input type="text" v-model="inputValue" @keyup.enter="add"><button @click="add">Add</button>
         </div>
         <div id="medium">
            <ol>
-             <li><input type="checkbox" name="item" style="zoom:150%"><label>123</label></li>
-             <li><input type="checkbox" name="item" style="zoom:150%"><label>456</label></li>
-             <li><input type="checkbox" name="item" style="zoom:150%"><label>789</label></li>
-             <li><input type="checkbox" name="item" style="zoom:150%"><label>1011</label></li>
+            <li v-for="todo in list">
+              <input type="checkbox" style="zoom:150%"><span>{{todo.text}}</span></li>
+            </li>
            </ul>
         </div>
         <div id="buttom">
@@ -26,6 +25,23 @@
         </div>
     </div>
   </div>
+  <script type="text/javascript">
+     new Vue({
+      el:'#main',
+      data:{
+        inputValue:'',
+        list:[
 
+
+        ],
+      },
+      methods:{
+        add:function(){
+          this.list.push({text:this.inputValue});
+          this.inputValue = '';
+        },
+      }
+     });
+  </script>
 </body>
 </html>
